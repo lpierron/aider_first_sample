@@ -54,7 +54,7 @@ def zip_code(code):
         z.write(arduino_file, arcname='blink.ino')
 
     # Clean up the temporary directory
-    shutil.rmtree(temp_dir)
+    # shutil.rmtree(temp_dir)
 
     return zipped_file
 
