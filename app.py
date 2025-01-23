@@ -3,14 +3,13 @@ import os
 import zipfile
 import shutil
 import logging
+from config import Config
 
 app = Flask(__name__)
-app.config['TEMP_DIR'] = os.path.join(os.path.dirname(__file__), 'temp')
-app.config['ARDUINO_FILE_NAME'] = 'blink.ino'
-app.config['ZIP_FILE_NAME'] = 'blink.zip'
+app.config.from_object(Config)
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=app.config.get('LOGGING_LEVEL'), format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def generate_arduino_code():
