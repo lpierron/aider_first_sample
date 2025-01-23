@@ -16,7 +16,7 @@ def generate_blink():
     zipped_code = zip_code(arduino_code)
 
     # Set the response headers for the zip file
-    return send_file(zipped_code, as_attachment=True, attachment_filename='blink.zip')
+    return send_file(zipped_code, as_attachment=True, download_name='blink.zip')
 
 def generate_arduino_code():
     # Generate the Arduino code here
