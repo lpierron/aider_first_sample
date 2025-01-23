@@ -10,7 +10,18 @@
 
     <script>
         document.getElementById('generate-blink').addEventListener('click', function() {
-            location.href = '/generate_blink';
+            fetch('/generate_blink')
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'blink.zip';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            });
         });
     </script>
 </body>
