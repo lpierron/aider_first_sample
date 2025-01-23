@@ -16,7 +16,12 @@ def generate_blink():
     zipped_code = zip_code(arduino_code)
 
     # Set the response headers for the zip file
-    return send_file(zipped_code, as_attachment=True, download_name='blink.zip')
+    try:
+        return send_file(zipped_code, as_attachment=True, download_name='blink.zip')
+    finally:
+        # Clean up the temporary directory
+        temp_dir = os.path.join(os.path.dirname(__file__), 'temp')
+        shutil.rmtree(temp_dir)
 
 def generate_arduino_code():
     # Generate the Arduino code here
@@ -52,9 +57,6 @@ def zip_code(code):
     zipped_file = os.path.join(temp_dir, 'blink.zip')
     with zipfile.ZipFile(zipped_file, 'w') as z:
         z.write(arduino_file, arcname='blink.ino')
-
-    # Clean up the temporary directory
-    # shutil.rmtree(temp_dir)
 
     return zipped_file
 
