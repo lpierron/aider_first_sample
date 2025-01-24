@@ -1,5 +1,6 @@
 import unittest
 import os
+import shutil
 import tempfile
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -14,8 +15,13 @@ class TestApp(unittest.TestCase):
         self.temp_dir = tempfile.mkdtemp()
         self.config = Config()
         self.config.TEMP_DIR = self.temp_dir
+        self.config.ARDUINO_FILE_NAME = "test_arduino.ino"
+        self.config.ZIP_FILE_NAME = "test_arduino.zip"
 
     def tearDown(self):
+        zip_file_path = os.path.join(self.temp_dir, self.config.ZIP_FILE_NAME)
+        if os.path.exists(zip_file_path):
+            os.remove(zip_file_path)
         os.rmdir(self.temp_dir)
 
     def test_home_route(self):
@@ -39,8 +45,7 @@ class TestApp(unittest.TestCase):
         zip_file_path = zip_code(code, self.config.TEMP_DIR, self.config.ARDUINO_FILE_NAME, self.config.ZIP_FILE_NAME)
         self.assertTrue(os.path.exists(zip_file_path))
         self.assertTrue(zip_file_path.endswith(".zip"))
-        os.remove(zip_file_path)
-
+        
 
 if __name__ == '__main__':
     unittest.main()
