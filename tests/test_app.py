@@ -22,6 +22,13 @@ class TestApp(unittest.TestCase):
         zip_file_path = os.path.join(self.temp_dir, self.config.ZIP_FILE_NAME)
         if os.path.exists(zip_file_path):
             os.remove(zip_file_path)
+        
+        for item in os.listdir(self.temp_dir):
+            item_path = os.path.join(self.temp_dir, item)
+            if os.path.isfile(item_path):
+                os.remove(item_path)
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
         os.rmdir(self.temp_dir)
 
     def test_home_route(self):
