@@ -1,6 +1,8 @@
 import unittest
 import os
 import tempfile
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app, zip_code, generate_arduino_code
 from config import Config
 
