@@ -1,5 +1,9 @@
 # Flask Arduino Code Generator
 
+![Build Status](https://github.com/lpierron/aider_first_sample/actions/workflows/test.yml/badge.svg)
+![License](https://img.shields.io/github/license/lpierron/aider_first_sample)
+![Code Coverage](https://img.shields.io/codecov/c/github/lpierron/aider_first_sample)
+
 This Flask application generates Arduino code (specifically, a simple "Blink" sketch), zips it, and provides it as a downloadable file.
 
 ## Functionality
